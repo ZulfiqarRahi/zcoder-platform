@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat Room - <%= room %></title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #e0e7ff 0%, #f3f4f6 60%, #f5d0fe 100%);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+    body::before, body::after {
+      content: '';
+      position: absolute;
+      z-index: 0;
+      border-radius: 50%;
+      opacity: 0.18;
+      filter: blur(12px);
+      pointer-events: none;
+    }
+    body::before {
+      width: 340px;
+      height: 340px;
+      background: #a5b4fc;
+      left: -120px;
+      top: 80px;
+      animation: float1 12s ease-in-out infinite alternate;
+    }
+    body::after {
+      width: 260px;
+      height: 260px;
+      background: #f472b6;
+      right: -100px;
+      bottom: 60px;
+      animation: float2 14s ease-in-out infinite alternate;
+    }
+    @keyframes float1 {
+      0% { transform: translateY(0) scale(1);}
+      100% { transform: translateY(40px) scale(1.15);}
+    }
+    @keyframes float2 {
+      0% { transform: translateY(0) scale(1);}
+      100% { transform: translateY(-30px) scale(1.1);}
+    }
+    header {
+      background: linear-gradient(90deg, #6366f1 0%, #a5b4fc 100%);
+      color: white;
+      padding: 18px 24px;
+      font-size: 22px;
+      font-weight: 600;
+      text-align: left;
+      box-shadow: 0 2px 12px rgba(99, 102, 241, 0.09);
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .leave-btn {
+      background: #ef4444;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 26px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: 500;
+      box-shadow: 0 2px 8px rgba(239, 68, 68, 0.10);
+      transition: background 0.2s;
+    }
+    .leave-btn:hover {
+      background: #b91c1c;
+    }
+    #messages {
+      flex: 1;
+      padding: 36px 10vw 36px 10vw;
+      overflow-y: auto;
+      background: transparent;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 1;
+    }
+    .message {
+      display: inline-block;
+      padding: 13px 20px;
+      border-radius: 20px;
+      margin-bottom: 4px;
+      max-width: 70%;
+      word-break: break-word;
+      box-shadow: 0 2px 12px rgba(99, 102, 241, 0.10);
+      position: relative;
+      font-size: 16px;
+      line-height: 1.6;
+      white-space: pre-line;
+      z-index: 1;
+    }
+    .message.self {
+      background: linear-gradient(90deg, #c7d2fe 0%, #a5b4fc 100%);
+      margin-left: auto;
+      text-align: right;
+      color: #3730a3;
+      border-top-right-radius: 6px;
+    }
+    .message.other {
+      background: #fff;
+      margin-right: auto;
+      text-align: left;
+      color: #334155;
+      border: 1px solid #e0e7ff;
+      border-top-left-radius: 6px;
+    }
+    .sender {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 2px;
+      display: block;
+      font-style: italic;
+    }
+    .system-message {
+      font-style: italic;
+      color: #64748b;
+      margin-bottom: 5px;
+      text-align: center;
+      background: #f1f5f9;
+      border-radius: 10px;
+      padding: 6px 0;
+      font-size: 15px;
+    }
+    #messageInputSection {
+      display: flex;
+      padding: 18px 10vw;
+      background: rgba(255,255,255,0.97);
+      border-top: 1px solid #e5e7eb;
+      align-items: flex-end;
+      gap: 12px;
+      z-index: 1;
+    }
+    #messageInput {
+      flex: 1;
+      padding: 14px;
+      font-size: 17px;
+      border-radius: 10px;
+      border: 1.5px solid #c7d2fe;
+      resize: none;
+      min-height: 48px;
+      max-height: 120px;
+      background: #f3f4f6;
+      transition: border 0.2s;
+      outline: none;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.04);
+    }
+    #messageInput:focus {
+      border: 1.5px solid #6366f1;
+      background: #fff;
+    }
+    #sendBtn {
+      padding: 14px 26px;
+      font-size: 17px;
+      background: linear-gradient(90deg, #6366f1 0%, #4f46e5 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.10);
+      transition: background 0.2s;
+    }
+    #sendBtn:hover {
+      background: #4338ca;
+    }
+    @media (max-width: 900px) {
+      #messages, #messageInputSection {
+        padding-left: 4vw;
+        padding-right: 4vw;
+      }
+    }
+    @media (max-width: 600px) {
+      header {
+        font-size: 18px;
+        padding: 12px 8px;
+      }
+      #messages, #messageInputSection {
+        padding-left: 2vw;
+        padding-right: 2vw;
+      }
+      #sendBtn, .leave-btn {
+        padding: 10px 10px;
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Room: <%= room %>
+    <button class="leave-btn" onclick="leaveRoom()">Leave Room</button>
+  </header>
+  <div id="messages"></div>
+  <div id="messageInputSection">
+    <!-- Only change: from <input type="text"> to <textarea> -->
+    <textarea id="messageInput" placeholder=""></textarea>
+    <button id="sendBtn">Send</button>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script defer src="/js/chat.js"></script>
+  <script>
+    window.chatRoom = "<%= room %>";
+    window.username = "<%= user.name %>";
+    function leaveRoom() {
+  if (window.socket) {
+    window.socket.emit('leaveRoom', window.chatRoom);
+  }
+  // Replace the current page in history so back doesn't return to chat
+  window.location.replace("/chat");
+}
+    // No extra JS for sending! Your /js/chat.js will handle sendBtn as before.
+    // Enter = new line, clicking Send will send.
+  </script>
+</body>
+</html>

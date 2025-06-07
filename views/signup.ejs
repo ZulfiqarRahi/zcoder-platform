@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ZCoder | Sign Up</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background: #181818;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .form-container {
+      background: #232526;
+      padding: 32px 28px 24px 28px;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+      width: 340px;
+    }
+    .form-container h2 {
+      margin-bottom: 18px;
+      color: #f8b400;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      color: #f8b400;
+      font-size: 15px;
+      letter-spacing: 0.5px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 9px 12px;
+      border: none;
+      border-radius: 5px;
+      background: #333;
+      color: #fff;
+      font-size: 15px;
+      outline: none;
+      transition: background 0.2s;
+    }
+    .form-group input:focus {
+      background: #444;
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 10px;
+      background: linear-gradient(90deg, #f8b400, #fceabb);
+      color: #232526;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 8px;
+    }
+    .submit-btn:hover {
+      background: linear-gradient(90deg, #fceabb, #f8b400);
+    }
+    .switch-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #f8b400;
+      text-decoration: none;
+      font-size: 15px;
+    }
+    .switch-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <form class="form-container" action="/user/signup" method="POST" >
+    <h2>Create Account</h2>
+    <div class="form-group">
+      <label for="fullname">Full Name</label>
+      <input type="text" id="fullname" name="fullname" required>
+    </div>
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required autocomplete="username">
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required minlength="6" autocomplete="new-password">
+    </div>
+    <button class="submit-btn" type="submit">Sign Up</button>
+    <a class="switch-link" href="/user/signin">Already have an account? Signin</a>
+  </form>
+</body>
+</html>

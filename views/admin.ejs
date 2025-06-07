@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add Question</title>
+  <style>
+    :root {
+      --bg-dark: #1e1e1e;
+      --bg-panel: #2b2f36;
+      --border-color: #3a3f44;
+      --accent-blue: #3c8dbc;
+      --text-primary: #e0e0e0;
+      --text-muted: #a0a5ab;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --spacing: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: var(--spacing);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .form-container {
+      background: var(--bg-panel);
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 500px;
+      padding: calc(var(--spacing) * 1.5);
+    }
+
+    .form-header {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: var(--spacing);
+      text-align: center;
+      color: #e7c66e;
+    }
+
+    .form-group {
+      margin-bottom: var(--spacing);
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .form-group input[type="text"],
+    .form-group textarea {
+      width: 100%;
+      background: #23272e;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 10px;
+      font-size: 1rem;
+      color: var(--text-primary);
+      resize: vertical;
+    }
+
+    .form-group input[type="text"]::placeholder,
+    .form-group textarea::placeholder {
+      color: #7d8590;
+    }
+
+    .form-group textarea {
+      min-height: 100px;
+    }
+
+    .button-wrapper {
+      text-align: center;
+      margin-top: var(--spacing);
+    }
+
+    .button-wrapper button {
+      background: var(--accent-blue);
+      color: var(--text-primary);
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease-in-out;
+    }
+
+    .button-wrapper button:hover {
+      background: #357ea5;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <div class="form-header">Add Question</div>
+    <form action="/admin" method="POST">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input
+          type="text"
+          id="title"
+          name="Title"
+          placeholder="Enter question title"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="body">Body</label>
+        <textarea
+          id="body"
+          name="Body"
+          placeholder="Enter question description"
+          required
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="output">Output</label>
+        <textarea
+          id="output"
+          name="Output"
+          placeholder="Enter expected output or example"
+          required
+        ></textarea>
+      </div>
+
+      <div class="button-wrapper">
+        <button type="submit">Add Question</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Problems</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #0f1115;
+      color: #f1f1f1;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    nav {
+      background-color: #1a1c20;
+      padding: 16px 30px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #e7c66e;
+      border-bottom: 2px solid #333;
+    }
+
+    .container {
+      display: flex;
+      flex: 1;
+      /* Title and list aligned to top-left */
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+
+    .sidebar {
+      width: 100%;
+      background-color: #16181d;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .problem-item {
+      background-color: #1e1e23;
+      border: 1px solid #333;
+      padding: 14px 20px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      transition: background 0.3s ease;
+      font-size: 1rem;
+      text-align: left; /* ensure text starts at leftmost point */
+    }
+
+    .problem-item:hover {
+      background-color: #27272e;
+    }
+
+    .problem-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .btn.solve {
+      background-color: #3c8dbc;
+      color: white;
+    }
+
+    .btn.bookmark {
+      background-color: #444;
+      color: #f1f1f1;
+    }
+
+    .btn:hover {
+      opacity: 0.85;
+    }
+
+    /* No problems message styling */
+    .no-problems {
+      font-size: 3rem;
+      color: #e74c3c;
+      margin: 20px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>📘 Problems</nav>
+
+  <!-- Content -->
+  <div class="container">
+    <% if (problem.length > 0) { %>
+      <!-- Full-width problem list -->
+      <div class="sidebar">
+        <% problem.forEach((q, index) => { %>
+          <div class="problem-item">
+            <div class="problem-title">
+              <%= index + 1 %>. <%= q.Title %>
+            </div>
+            <div class="buttons">
+              <form action="/console/editor" method="POST">
+                <input type="hidden" name="title" value="<%= q.Title %>">
+                <input type="hidden" name="body"  value="<%= q.Body %>">
+                <input type="hidden" name="output"value="<%= q.Output %>">
+                <button class="btn solve" type="submit">Solve</button>
+              </form>
+              <form action="/bookmarks/<%= q._id %>" method="POST">
+                <button class="btn bookmark" type="submit">🔖 Bookmark</button>
+              </form>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <!-- No problems message -->
+      <div class="no-problems">
+        No problems have been uploaded by the admin.<br>
+        Contact the ADMIN
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>

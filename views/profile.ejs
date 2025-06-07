@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #232526 0%, #3a3d40 35%, #5f2c82 70%, #f8b400 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      transition: background 0.4s;
+    }
+
+    .profile-card {
+      width: 440px;
+      max-width: 96vw;
+      background: rgba(255,255,255,0.18);
+      border-radius: 28px;
+      padding: 56px 38px 44px 38px;
+      text-align: center;
+      box-shadow: 0 12px 36px 0 rgba(40,40,40,0.24), 0 2px 8px 0 rgba(248,180,0,0.13);
+      backdrop-filter: blur(14px) saturate(160%);
+      border: 1.5px solid rgba(255,255,255,0.18);
+      position: relative;
+      transition: box-shadow 0.2s;
+    }
+    .profile-card:hover {
+      box-shadow: 0 18px 48px 0 rgba(40,40,40,0.32), 0 3px 12px 0 rgba(248,180,0,0.18);
+    }
+
+    /* Back button */
+    .back-btn {
+      position: absolute;
+      top: 18px;
+      left: 22px;
+      background: linear-gradient(90deg, #f8b400 60%, #5f2c82 100%);
+      color: #232526;
+      border: none;
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(95,44,130,0.10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, color 0.2s, transform 0.14s;
+      z-index: 2;
+      outline: none;
+    }
+    .back-btn:hover, .back-btn:focus {
+      background: linear-gradient(90deg, #5f2c82 0%, #f8b400 100%);
+      color: #fff;
+      transform: scale(1.08);
+    }
+
+    .avatar-wrapper {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 26px auto;
+      border: 6px solid #f8b400;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 2px 18px rgba(248,180,0,0.22);
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s;
+    }
+    .avatar-wrapper:hover {
+      border-color: #5f2c82;
+    }
+    .avatar {
+      width: 138px;
+      height: 138px;
+      object-fit: cover;
+      border-radius: 50%;
+      transition: transform 0.2s;
+    }
+    .avatar-wrapper:hover .avatar {
+      transform: scale(1.06);
+    }
+
+    .name {
+      margin: 0;
+      font-size: 2rem;
+      color: #232526;
+      font-weight: 700;
+      letter-spacing: 0.7px;
+      margin-bottom: 6px;
+      text-shadow: 0 1px 10px rgba(248,180,0,0.08);
+    }
+
+    .username {
+      margin: 0 0 34px 0;
+      font-size: 1.12rem;
+      color: #3a3d40;
+      letter-spacing: 0.3px;
+      word-break: break-all;
+      font-weight: 500;
+      opacity: 0.88;
+    }
+
+    .btn {
+      background: linear-gradient(90deg, #f8b400 60%, #5f2c82 100%);
+      color: #232526;
+      border: none;
+      padding: 17px 0;
+      width: 100%;
+      font-size: 1.18rem;
+      border-radius: 9px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 2px 12px rgba(248,180,0,0.09);
+      transition: background 0.2s, color 0.2s, transform 0.14s;
+      margin-top: 18px;
+      letter-spacing: 0.6px;
+      outline: none;
+    }
+    .btn:hover {
+      background: linear-gradient(90deg, #5f2c82 0%, #f8b400 100%);
+      color: #fff;
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 4px 18px rgba(95,44,130,0.14);
+    }
+
+    /* Logout button */
+    .logout-btn {
+      background: linear-gradient(90deg, #5f2c82 60%, #f8b400 100%);
+      color: #232526;
+      border: none;
+      padding: 17px 0;
+      width: 100%;
+      font-size: 1.18rem;
+      border-radius: 9px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 2px 12px rgba(248,180,0,0.09);
+      transition: background 0.2s, color 0.2s, transform 0.14s;
+      margin-top: 12px;
+      letter-spacing: 0.6px;
+      outline: none;
+    }
+    .logout-btn:hover {
+      background: linear-gradient(90deg, #f8b400 0%, #5f2c82 100%);
+      color: #fff;
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 4px 18px rgba(95,44,130,0.14);
+    }
+
+    @media (max-width: 600px) {
+      .profile-card {
+        padding: 28px 5vw 24px 5vw;
+        width: 98vw;
+      }
+      .avatar-wrapper {
+        width: 90px;
+        height: 90px;
+      }
+      .avatar {
+        width: 80px;
+        height: 80px;
+      }
+      .name {
+        font-size: 1.18rem;
+      }
+      .username {
+        font-size: 1rem;
+      }
+      .back-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 1.1rem;
+        top: 10px;
+        left: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="profile-card">
+    <!-- Back Button -->
+    <button class="back-btn" title="Back" onclick="window.history.back()">&larr;</button>
+
+    <div class="avatar-wrapper">
+      <img src="<%= locals.user.profileimageURL %>" alt="User Avatar" class="avatar">
+    </div>
+
+    <h2 class="name"><%= locals.user.name %></h2>
+    <p class="username"><%= locals.user.email %></p>
+
+    <!-- Edit Profile Button -->
+    <button id="editBtn" class="btn">Edit Profile</button>
+    <!-- Change Password Button -->
+    <button id="editPasswordBtn" class="btn">Change Password</button>
+    <!-- Logout Button -->
+    <button id="logoutBtn" class="logout-btn" onclick="window.location.href='/user/logout'">Logout</button>
+  </div>
+
+  <script>
+    document.getElementById("editBtn").addEventListener("click", () => {
+      window.location.href = '/update/profile';
+    });
+
+    document.getElementById("editPasswordBtn").addEventListener("click", () => {
+      window.location.href = '/update/password';
+    });
+  </script>
+</body>
+</html>

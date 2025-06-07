@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bookmarked Questions</title>
+  <style>
+    body {
+      background-color: #121212;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #ffffff;
+      padding: 40px;
+    }
+
+    .bookmark-feature {
+      display: flex;
+      align-items: center;
+      font-size: 18px;
+      line-height: 1.6;
+      color: #ddd;
+      margin-bottom: 30px;
+    }
+
+    .bookmark-feature b {
+      color: white;
+      font-weight: 600;
+      margin-right: 5px;
+    }
+
+    .bookmark-feature::before {
+      content: "•";
+      color: #00bcd4;
+      font-size: 22px;
+      margin-right: 10px;
+    }
+
+    .no-bookmark {
+      font-size: 28px;
+      color: #f44336;
+      text-align: center;
+      margin-top: 100px;
+    }
+
+    .question-card {
+      background-color: #1f1f1f;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border-left: 5px solid #00bcd4;
+    }
+
+    .question-card h3 {
+      color: #00e5ff;
+    }
+
+    .button-group {
+      margin-top: 10px;
+    }
+
+    .button-group form {
+      display: inline-block;
+      margin-right: 10px;
+    }
+
+    button {
+      background-color: #00bcd4;
+      border: none;
+      padding: 8px 16px;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0097a7;
+    }
+
+    .unbookmark-btn {
+      background-color: #f44336;
+    }
+
+    .unbookmark-btn:hover {
+      background-color: #d32f2f;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bookmark-feature">
+    <b>Code Bookmarking</b> – Save and organize coding problems with tags of the topics of the problem
+  </div>
+
+  <% if (questions.length === 0) { %>
+    <div class="no-bookmark">😢 No Bookmarked Questions Found</div>
+  <% } else { %>
+    <% questions.forEach(question => { %>
+      <div class="question-card">
+        <h3><%= question.Title %></h3>
+        <p><%= question.Body %></p>
+
+        <div class="button-group">
+          <!-- Solve button -->
+          <form action="/bookmarks/console/editor/<%= question._id %>" method="GET">
+  <button type="submit">Solve</button>
+</form>
+
+          <!-- Unbookmark button -->
+          <form action="/bookmarks/unbook/<%=question._id %>" method="POST">
+            <button type="submit" class="unbookmark-btn">Unbookmark</button>
+          </form>
+        </div>
+      </div>
+    <% }) %>
+  <% } %>
+
+</body>
+</html>

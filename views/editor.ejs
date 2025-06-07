@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Advanced Code Editor</title>
+  <style>
+    :root {
+      --bg-dark: #1a1d1f;
+      --border-color: #3a4f44;
+      --accent-blue: #3c8dbc;
+      --accent-hover: #357aa3;
+      --text-primary: #e0e0e0;
+      --radius-lg: 12px;
+      --radius-md: 8px;
+    }
+
+    html, body {
+      height: 100%; margin: 0; padding: 20px; box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif; background: var(--bg-dark); color: var(--text-primary);
+    }
+
+    .main-wrap {
+      display: flex; height: calc(100vh - 40px); width: 100%;
+    }
+
+    /* Panels */
+    #con1, #con2 {
+      flex: 1; box-sizing: border-box; display: flex; flex-direction: column; overflow: hidden;
+    }
+
+    #con1 {
+      width: 35%; background: #23272e; border: 2px solid var(--border-color);
+      border-radius: var(--radius-lg); margin-right: 20px; padding: 15px;
+      box-shadow: 4px 4px 12px rgba(0,0,0,0.2);
+      font-size: 150%;
+    }
+    .problem-title { font-size:1.4rem; color:#e7c66e; font-weight:bold; margin-bottom:15px; }
+    .problem-body {
+      flex:2; background:#2b2f36; border:1px solid var(--border-color);
+      border-radius:var(--radius-md); padding:10px; font-family:monospace;
+      white-space:pre-wrap; overflow-y:auto; margin-bottom:15px;
+    }
+    .problem-output {
+      flex:1; background:#2b2f36; border:1px solid var(--border-color);
+      border-radius:var(--radius-md); padding:10px; font-family:monospace;
+      white-space:pre-wrap; overflow-y:auto;
+    }
+
+    #con2 {
+      background:#1e1e1e; border:2px solid var(--border-color);
+      border-radius:var(--radius-lg); box-shadow:4px 4px 12px rgba(0,0,0,0.2);
+    }
+    #editor-controls {
+      background:#23272e; padding:12px 20px; border-bottom:2px solid var(--border-color);
+      display:grid; grid-template-columns:auto auto 1fr; gap:12px; align-items:center;
+    }
+    select#language {
+      padding:8px; border-radius:var(--radius-md); border:1px solid var(--border-color);
+      background:#2b2f36; color:var(--text-primary); font-weight:600; cursor:pointer;
+      transition:background 0.2s;
+    }
+    select#language:hover { background:#2f333a; }
+    button#runBtn {
+      padding:8px 16px; border-radius:var(--radius-md); border:none;
+      background:var(--accent-blue); color:white; font-weight:600; cursor:pointer;
+      transition:background 0.2s;
+    }
+    button#runBtn:hover { background:var(--accent-hover); }
+
+    #editor {
+      flex:1; margin:15px; border:2px solid var(--border-color);
+      border-radius:var(--radius-md);
+    }
+    #output {
+      background:#23272e; color:var(--text-primary); padding:15px 20px;
+      border:2px solid var(--border-color); border-radius:var(--radius-md);
+      border-top:none; min-height:120px; max-height:30vh; overflow-y:auto;
+      font-family:monospace;
+    }
+    #output::before { content:"Output:"; color:#7d8590; display:block; margin-bottom:8px; font-size:0.9rem; }
+
+    /* Interactive input */
+    #interactive-input {
+      margin:10px 15px; padding:8px; border:1px solid var(--border-color);
+      border-radius:var(--radius-md); background:#2b2f36; color:var(--text-primary);
+      font-family:monospace; transition:background 0.2s;
+    }
+    /* interactive input always enabled */
+
+    #input-history {
+      margin:0 15px 15px; padding:10px; background:#1e1e1e;
+      border:1px solid var(--border-color); border-radius:var(--radius-md);
+      font-family:monospace; max-height:80px; overflow-y:auto; color:var(--text-primary);
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.11.2/ace.js"></script>
+</head>
+<body>
+  <div class="main-wrap">
+    <div id="con1">
+      <% if (locals.question) { %>
+        <div class="problem-title"><%= locals.question.title %></div>
+        <div class="problem-body"><%= locals.question.body %></div>
+        <div class="problem-output"><%= locals.question.output %></div>
+      <% } else { %>
+        <h2>No Problem selected</h2>
+      <% } %>
+    </div>
+    <div id="con2">
+      <div id="editor-controls">
+        <select id="language">
+          <option value="71" selected>Python 3</option>
+          <option value="62">Java</option>
+          <option value="54">C++</option>
+          <option value="50">C</option>
+          <option value="63">JavaScript</option>
+          <option value="51">C#</option>
+        </select>
+        <button id="runBtn">Run Code</button>
+        <textarea id="stdinHidden" style="display:none;"></textarea>
+      </div>
+      <div id="editor"></div>
+      <div id="output"></div>
+      <input type="text" id="interactive-input" class="inactive" placeholder="Enter input…" />
+      <div id="input-history"></div>
+    </div>
+  </div>
+
+ <script>
+  const boilerplates = {
+    '71': '',
+    '62': `public class Main {\n  public static void main(String[] args) {\n    \n  }\n}`,
+    '54': `#include <iostream>\nusing namespace std;\nint main() {\n    \n    return 0;\n}`,
+    '50': `#include <stdio.h>\nint main() {\n    \n    return 0;\n}`,
+    '63': '',
+    '51': `using System;\nclass Program {\n  static void Main(string[] args) {\n    \n  }\n}`
+  };
+
+  const modes = {
+    '71': 'python',
+    '62': 'java',
+    '54': 'c_cpp',
+    '50': 'c_cpp',
+    '63': 'javascript',
+    '51': 'csharp'
+  };
+
+  const editor = ace.edit('editor');
+  editor.setTheme('ace/theme/monokai');
+  editor.session.setMode('ace/mode/python');
+  editor.session.setValue(boilerplates['71']);
+
+  const runBtn = document.getElementById('runBtn');
+  const inputField = document.getElementById('interactive-input');
+  const historyDiv = document.getElementById('input-history');
+  const hiddenTextarea = document.getElementById('stdinHidden');
+
+  document.getElementById('language').addEventListener('change', e => {
+    const id = e.target.value;
+    editor.session.setMode(`ace/mode/${modes[id]}`);
+    editor.session.setValue(boilerplates[id]);
+    hiddenTextarea.value = '';
+    historyDiv.textContent = '';
+    document.getElementById('output').innerText = '';
+  });
+
+  function runCode(stdinVal) {
+    runBtn.disabled = true;
+    runBtn.textContent = 'Running...';
+
+    fetch('/compile', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        source_code: editor.getValue(),
+        language_id: Number(document.getElementById('language').value),
+        stdin: stdinVal
+      })
+    })
+    .then(r => r.json())
+    .then(res => {
+      let out = '';
+      if (res.status && res.status.description !== 'Accepted') out += `⚠️ ${res.status.description}\n\n`;
+      if (res.compile_output) out += `Compiler Msgs:\n${res.compile_output}\n\n`;
+      if (res.stderr) out += `Error:\n${res.stderr}\n\n`;
+      if (res.stdout) out += res.stdout;
+
+      document.getElementById('output').innerText = out;
+
+      // If prompt detected, auto-focus input
+      const lastLine = out.trim().split('\n').pop();
+      if (lastLine.endsWith(':')) {
+        inputField.placeholder = lastLine;
+        inputField.focus();
+      } else {
+        inputField.blur(); // remove cursor if no input is required
+        inputField.placeholder = "Enter input…";
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      document.getElementById('output').innerText = '❌ Run error.';
+    })
+    .finally(() => {
+      runBtn.disabled = false;
+      runBtn.textContent = 'Run Code';
+    });
+  }
+
+  inputField.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const val = inputField.value.trim();
+      if (!val) return;
+      historyDiv.textContent += val + '\n';
+      hiddenTextarea.value += val + '\n';
+      inputField.value = '';
+      runCode(hiddenTextarea.value);
+    }
+  });
+
+  runBtn.addEventListener('click', () => {
+    hiddenTextarea.value = '';
+    historyDiv.textContent = '';
+    runCode('');
+  });
+</script>
+
+</body>
+</html>

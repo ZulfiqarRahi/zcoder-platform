@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZCODER Platform</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: #e0e0e0;
+      min-height: 100vh;
+    }
+
+    /* NAVBAR */
+    nav {
+      background: linear-gradient(135deg, #4B0082 0%, #8A2BE2 100%);
+      padding: 1rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+      height: 80px;
+    }
+    .logo {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 1.5px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+    }
+    ul.nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    ul.nav-links li a,
+    .dropdown-btn {
+      text-decoration: none;
+      color: #e0e0e0;
+      font-size: 1.1rem;
+      padding: 12px 18px;
+      transition: background 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    ul.nav-links li a:hover,
+    .dropdown-btn:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+      border-radius: 6px;
+    }
+
+    /* DROPDOWN */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #4B0082;
+      min-width: 180px;
+      border-radius: 8px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+      z-index: 1;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .dropdown-content a {
+      display: block;
+      width: 100%;
+      padding: 14px 18px;
+      color: #e0e0e0;
+      text-decoration: none;
+      transition: background 0.3s ease;
+      box-sizing: border-box;
+    }
+    .dropdown-content a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+        height: auto;
+      }
+      ul.nav-links {
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 1rem;
+        width: 100%;
+      }
+      ul.nav-links li a,
+      .dropdown-btn {
+        display: block;
+        width: 100%;
+      }
+      .dropdown-content {
+        position: static;
+      }
+    }
+
+    /* HERO */
+    .home-hero {
+      background: linear-gradient(120deg, #4B0082 0%, #8A2BE2 100%);
+      color: #ffffff;
+      padding: 70px 20px;
+      text-align: center;
+      animation: fadeInDown 1.2s cubic-bezier(.77, 0, .18, 1) both;
+    }
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .hero-content h1 {
+      font-size: 2.8rem;
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin-bottom: 18px;
+      letter-spacing: 1.5px;
+      font-weight: 700;
+      background: linear-gradient(90deg, #f8b400 40%, #ffffff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-content .brand {
+      color: #f8b400;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+    }
+    .hero-content p {
+      font-size: 1.2rem;
+      color: #f0f0f0;
+      max-width: 550px;
+      margin: 0 auto;
+      line-height: 1.7;
+      opacity: 0.95;
+      animation: fadeIn 2s 0.5s both;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* FEATURES */
+    .features-section {
+      background: #181818;
+      padding: 55px 20px 40px;
+      animation: fadeInUp 1.2s 0.5s cubic-bezier(.77, 0, .18, 1) both;
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .features-title {
+      text-align: center;
+      font-size: 2rem;
+      color: #f8b400;
+      font-family: 'Montserrat', Arial, sans-serif;
+      margin-bottom: 35px;
+      position: relative;
+    }
+    .features-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #f8b400, #8A2BE2);
+      margin: 16px auto 0;
+      border-radius: 2px;
+    }
+    .features-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2.5rem;
+      max-width: 1050px;
+      margin: 0 auto;
+    }
+    .feature-card {
+      background: #242424;
+      border-radius: 14px;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
+      padding: 2rem 1.5rem 1.4rem;
+      width: 300px;
+      height: 340px;
+      text-align: center;
+      transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+      border: 1.5px solid #333333;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: cardFadeIn 1s forwards;
+    }
+    .feature-card:nth-child(1) {
+      animation-delay: 0.3s;
+    }
+    .feature-card:nth-child(2) {
+      animation-delay: 0.5s;
+    }
+    .feature-card:nth-child(3) {
+      animation-delay: 0.7s;
+    }
+    .feature-card:nth-child(4) {
+      animation-delay: 0.9s;
+    }
+    @keyframes cardFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .feature-card:hover {
+      box-shadow: 0 8px 36px rgba(0, 0, 0, 0.8);
+      transform: translateY(-6px) scale(1.05);
+      border-color: #8A2BE2;
+    }
+    .feature-icon {
+      font-size: 2.4rem;
+      margin-bottom: 18px;
+      color: #f8b400;
+    }
+    .feature-card h3 {
+      color: #ffffff;
+      margin-bottom: 0.7rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .feature-card p {
+      color: #cccccc;
+      font-size: 1rem;
+      opacity: 0.9;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 900px) {
+      .home-hero {
+        padding: 40px 0 30px 0;
+      }
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      .features-grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.4rem;
+      }
+      .feature-card {
+        width: 90%;
+        max-width: 320px;
+        height: auto; /* Let it grow if needed on small screens */
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <% if (locals.user) { %>
+      <div class="logo">ZCODER</div>
+      <ul class="nav-links">
+        <li><a href="/home">Home</a></li>
+        <li><a href="/bookmarks">Bookmark</a></li>
+        <li><a href="/console/problem">Problems &amp; Editor</a></li>
+        <li><a href="/chat">Rooms</a></li>
+        <li class="dropdown">
+          <button class="dropdown-btn"><%= locals.user.name %> ▼</button>
+          <div class="dropdown-content">
+            <a href="/user/profile">My Profile</a>
+            <a href="/user/logout">Logout</a>
+          </div>
+        </li>
+      </ul>
+    <% } else { %>
+      <div class="logo">ZCODER</div>
+      <ul class="nav-links">
+        <li><a href="/home">Home</a></li>
+        <li><a href="/user/signup">Create Account</a></li>
+        <li><a href="/user/signin">Sign In</a></li>
+      </ul>
+    <% } %>
+  </nav>
+
+  <!-- HOMEPAGE HERO SECTION -->
+  <section class="home-hero">
+    <div class="hero-content">
+      <h1>Welcome to <span class="brand">ZCODER</span></h1>
+      <p>The collaborative coding platform for modern developers.<br>Bookmark problems, join rooms, and code together in real time.</p>
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION -->
+  <section class="features-section">
+    <h2 class="features-title">Platform Features</h2>
+    <div class="features-grid">
+      <div class="feature-card" id="RoomCard">
+        <div class="feature-icon">👥</div>
+        <h3>Rooms</h3>
+        <p>Collaborate with peers in real-time rooms for coding, discussion, and learning.</p>
+      </div>
+      <div class="feature-card" id="BookmarkCard">
+        <div class="feature-icon">🔖</div>
+        <h3>Code Bookmarking</h3>
+        <p>Save and organize your favorite coding problems and solutions for quick access.</p>
+      </div>
+      <div class="feature-card" id="EditorCard">
+        <div class="feature-icon">⚙️</div>
+        <h3>Problems & Editor</h3>
+        <p>Solve coding challenges and write code with our powerful in-browser editor.</p>
+      </div>
+      <div class="feature-card" id="profileCard">
+        <div class="feature-icon">📊</div>
+        <h3>User Profile</h3>
+        <p>Manage your personal information and showcase your coding identity.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.getElementById('profileCard').addEventListener('click', () => {
+      window.location.href = '/user/profile';
+    });
+    document.getElementById('EditorCard').addEventListener('click', () => {
+      window.location.href = '/console/problem';
+    });
+    document.getElementById('BookmarkCard').addEventListener('click', () => {
+      window.location.href = '/bookmarks';
+    });
+    document.getElementById('RoomCard').addEventListener('click', () => {
+      window.location.href = '/chat';
+    });
+  </script>
+</body>
+</html>

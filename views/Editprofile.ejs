@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edit Profile</title>
+  <style>
+    body { 
+      font-family: 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(120deg, #232526 0%, #5f2c82 60%, #f8b400 100%);
+      color: #232526;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    .screen {
+      max-width: 420px;
+      width: 100%;
+      background: rgba(255,255,255,0.19);
+      box-shadow: 0 8px 32px rgba(40,40,40,0.18), 0 2px 8px rgba(248,180,0,0.12);
+      border-radius: 24px;
+      min-height: 620px;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(14px) saturate(140%);
+      border: 1.5px solid rgba(255,255,255,0.18);
+      overflow: hidden;
+      margin: 40px 32px 32px 32px;
+    }
+    @media (max-width: 600px) {
+      .screen {
+        max-width: 98vw;
+        min-height: 96vh;
+        margin: 16px 8px 8px 8px;
+        border-radius: 12px;
+      }
+    }
+    .header {
+      background: linear-gradient(90deg, #5f2c82 0%, #f8b400 100%);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      color: #fff;
+      border-bottom-left-radius: 36px 18px;
+      border-bottom-right-radius: 36px 18px;
+      box-shadow: 0 2px 16px rgba(95,44,130,0.08);
+      position: relative;
+      z-index: 1;
+    }
+    .header .btn {
+      font-size: 1.3rem;
+      border: none;
+      background: transparent;
+      color: #fff;
+      cursor: pointer;
+      padding: 0 10px;
+      transition: color 0.18s;
+    }
+    .header .btn.back {
+      margin-right: 12px;
+    }
+    .header .btn:hover {
+      color: #232526;
+    }
+    .header h1 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin: 0;
+      flex: 1;
+      text-align: left;
+    }
+    .avatar-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 2;
+    }
+    .avatar-border {
+      display: inline-block;
+      padding: 5px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f8b400 0%, #5f2c82 100%);
+      box-shadow: 0 2px 16px rgba(248,180,0,0.13);
+    }
+    .avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 4px solid #fff;
+      object-fit: cover;
+      background: #eee;
+      box-shadow: 0 1px 8px rgba(95,44,130,0.08);
+      display: block;
+    }
+    .change-pic {
+      margin-top: 10px;
+      font-size: 0.97rem;
+      color: #5f2c82;
+      cursor: pointer;
+      font-weight: 500;
+      background: none;
+      border: none;
+      outline: none;
+      transition: color 0.18s;
+    }
+    .change-pic:hover {
+      color: #f8b400;
+      text-decoration: underline;
+    }
+    .form {
+      padding: 24px 60px 20px 28px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .form-group {
+      margin-bottom: 22px;
+      text-align: left;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 1.01rem;
+      font-weight: 500;
+      color: #5f2c82;
+      letter-spacing: 0.2px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 1.08rem;
+      border: 1.5px solid #e4d9f7;
+      border-radius: 8px;
+      outline: none;
+      background: rgba(255,255,255,0.85);
+      color: #232526;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 1px 4px rgba(95,44,130,0.04);
+    }
+    .form-group input:focus {
+      border-color: #f8b400;
+      box-shadow: 0 2px 8px rgba(248,180,0,0.13);
+    }
+    .btn-update {
+      width: 100%;
+      margin: 12px 18px 0 18px;
+      padding: 14px 0;
+      background: linear-gradient(90deg, #f8b400 60%, #5f2c82 100%);
+      color: #fff;
+      font-size: 1.13rem;
+      font-weight: 600;
+      text-align: center;
+      border: none;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, box-shadow 0.14s;
+      box-shadow: 0 2px 12px rgba(248,180,0,0.09);
+      letter-spacing: 0.6px;
+    }
+    .btn-update:hover {
+      background: linear-gradient(90deg, #5f2c82 0%, #f8b400 100%);
+      color: #232526;
+      box-shadow: 0 4px 18px rgba(95,44,130,0.14);
+    }
+  </style>
+</head>
+<body>
+  <div class="screen">
+    <header class="header">
+      <button class="btn back" onclick="window.history.back()">←</button>
+      <h1>Edit Profile</h1>
+      <button class="btn share" title="Share Profile">⤴</button>
+    </header>
+    <div class="avatar-section">
+      <span class="avatar-border">
+        <img class="avatar" src="<%= locals.user.profileimageURL %>" alt="Profile picture">
+      </span>
+      <button class="change-pic" type="button">Change Picture</button>
+    </div>
+    <form class="form" action="/update/profile" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text" value="<%= user.name %>">
+      </div>
+      <div class="form-group">
+        <label for="email">Email I’d</label>
+        <input id="email" name="email" type="email" value="<%= user.email %>">
+      </div>
+       <input id="photoInput" name="avatar" type="file" accept="image/*" style="display: none;">
+       <button type="submit" class="btn-update" id="btn-update">Update</button>
+    </form>
+  </div>
+  <script>
+    document.querySelector('.change-pic')
+  .addEventListener('click', () => {
+    document.getElementById('photoInput').click();
+  });
+  document.getElementById('photoInput').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;                     // no file picked?
+  const img = document.querySelector('.avatar');
+  const url = URL.createObjectURL(file); // create a blob URL
+  img.src = url;                         // show it in the avatar circle
+  // (optional) revoke after it’s loaded to free memory:
+  img.onload = () => URL.revokeObjectURL(url);
+});
+  </script>
+</body>
+</html>
