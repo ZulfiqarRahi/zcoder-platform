@@ -1,0 +1,88 @@
+[{
+  "_id": {
+    "$oid": "6844414ed2195f0f2fab9feb"
+  },
+  "Title": "Two Sum",
+  "Body": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.",
+  "Output": "Example 1:\r\nInput: nums = [2,7,11,15], target = 9  \r\nOutput: [0,1]  \r\n\r\nExample 2:\r\nInput: nums = [3,2,4], target = 6  \r\nOutput: [1,2]  \r\n\r\nExample 3:\r\nInput: nums = [3,3], target = 6  \r\nOutput: [0,1] ",
+  "bookmark": [
+    {
+      "$oid": "68348bf2dd7f512bd2af00cf"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-06-07T13:40:30.036Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-07T16:51:46.630Z"
+  },
+  "__v": 2
+},
+{
+  "_id": {
+    "$oid": "68444177d2195f0f2fab9fef"
+  },
+  "Title": " Add Two Numbers",
+  "Body": "You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.\r\nYou may assume the two numbers do not contain any leading zero, except the number 0 itself.",
+  "Output": "Example 1:\r\nInput: l1 = [2,4,3], l2 = [5,6,4]  \r\nOutput: [7,0,8]  \r\nExplanation: 342 + 465 = 807.  \r\n\r\nExample 2:\r\nInput: l1 = [0], l2 = [0]  \r\nOutput: [0]  \r\n\r\nExample 3:\r\nInput: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]  \r\nOutput: [8,9,9,9,0,0,0,1] ",
+  "bookmark": [],
+  "createdAt": {
+    "$date": "2025-06-07T13:41:11.501Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-07T15:02:43.040Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "68444193d2195f0f2fab9ff3"
+  },
+  "Title": " Longest Substring Without Repeating Characters",
+  "Body": "Given a string s, find the length of the longest substring without repeating characters.",
+  "Output": "Example 1:\r\nInput: s = \"abcabcbb\"  \r\nOutput: 3  \r\nExplanation: The answer is \"abc\", with the length of 3.  \r\n\r\nExample 2:\r\nInput: s = \"bbbbb\"  \r\nOutput: 1  \r\nExplanation: The answer is \"b\", with the length of 1.  \r\n\r\nExample 3:\r\nInput: s = \"pwwkew\"  \r\nOutput: 3  \r\nExplanation: The answer is \"wke\", with the length of 3.\r\nNote that the answer must be a substring, \"pwke\" is a subsequence and not a substring.  \r\n",
+  "bookmark": [],
+  "createdAt": {
+    "$date": "2025-06-07T13:41:39.236Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-07T16:38:08.048Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "684441b4d2195f0f2fab9ff7"
+  },
+  "Title": " Median of Two Sorted Arrays",
+  "Body": "Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).",
+  "Output": "Example 1:\r\nInput: nums1 = [1,3], nums2 = [2]  \r\nOutput: 2.00000  \r\nExplanation: merged array = [1,2,3] and median is 2.  \r\n\r\nExample 2:\r\nInput: nums1 = [1,2], nums2 = [3,4]  \r\nOutput: 2.50000  \r\nExplanation: merged array = [1,2,3,4] and median = (2 + 3) / 2 = 2.5.  \r\n\r\nExample 3:\r\nInput: nums1 = [0,0], nums2 = [0,0]  \r\nOutput: 0.00000  ",
+  "bookmark": [],
+  "createdAt": {
+    "$date": "2025-06-07T13:42:12.305Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-07T16:50:25.772Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "684441ced2195f0f2fab9ffb"
+  },
+  "Title": " Reverse Linked List",
+  "Body": "Given the head of a singly linked list, reverse the list, and return the reversed list.",
+  "Output": "Example 1:\r\nInput: head = [1,2,3,4,5]  \r\nOutput: [5,4,3,2,1]  \r\n\r\nExample 2:\r\nInput: head = [1,2]  \r\nOutput: [2,1]  \r\n\r\nExample 3:\r\nInput: head = []  \r\nOutput: []  \r\n",
+  "bookmark": [
+    {
+      "$oid": "68348bf2dd7f512bd2af00cf"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-06-07T13:42:38.833Z"
+  },
+  "updatedAt": {
+    "$date": "2025-06-07T16:51:48.000Z"
+  },
+  "__v": 1
+}]
