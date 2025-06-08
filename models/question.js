@@ -1,6 +1,4 @@
 const mongoose=require("mongoose")
-// const{createHmac,randomBytes}=require("crypto")
-// const { createtokenForUser } = require("../services/authentication")
 const questionSchema=new mongoose.Schema({
 Title:{
     type:String,
