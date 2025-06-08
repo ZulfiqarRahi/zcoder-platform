@@ -118,9 +118,8 @@
                 <input type="hidden" name="output"value="<%= q.Output %>">
                 <button class="btn solve" type="submit">Solve</button>
               </form>
-              <form action="/bookmarks/<%= q._id %>" method="POST">
-                <button class="btn bookmark" type="submit">🔖 Bookmark</button>
-              </form>
+             <button class="btn bookmark" onclick="bookmarkQuestion('<%= q._id %>')">🔖 Bookmark</button>
+
             </div>
           </div>
         <% }) %>
@@ -133,5 +132,25 @@
       </div>
     <% } %>
   </div>
+<script>
+  async function bookmarkQuestion(questionId) {
+    try {
+      const res = await fetch(`/bookmarks/${questionId}`, {
+        method: 'POST'
+      });
+
+      if (res.ok) {
+        alert("Bookmarked successfully!");
+        // Optionally update the UI (like changing button color or text)
+      } else {
+        alert("Failed to bookmark");
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      alert("Something went wrong!");
+    }
+  }
+</script>
+
 </body>
 </html>
