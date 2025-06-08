@@ -203,10 +203,10 @@
   });
   document.getElementById('photoInput').addEventListener('change', e => {
   const file = e.target.files[0];
-  if (!file) return;                     // no file picked?
+  if (!file) return;                     
   const img = document.querySelector('.avatar');
-  const url = URL.createObjectURL(file); // create a blob URL
-  img.src = url;                         // show it in the avatar circle
+  const url = URL.createObjectURL(file); 
+  img.src = url;                       
   // (optional) revoke after it’s loaded to free memory:
   img.onload = () => URL.revokeObjectURL(url);
 });
