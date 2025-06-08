@@ -104,13 +104,32 @@
 </form>
 
           <!-- Unbookmark button -->
-          <form action="/bookmarks/unbook/<%=question._id %>" method="POST">
-            <button type="submit" class="unbookmark-btn">Unbookmark</button>
-          </form>
+         <button class="unbookmark-btn" onclick="unbookmarkQuestion('<%= question._id %>', this)">Unbookmark</button>
+
         </div>
       </div>
     <% }) %>
   <% } %>
+<script>
+  async function unbookmarkQuestion(questionId, btn) {
+    try {
+      const res = await fetch(`/bookmarks/unbook/${questionId}`, {
+        method: 'POST'
+      });
+
+      if (res.ok) {
+        alert("Removed from bookmarks!");
+        // Optionally remove the card from the DOM
+        btn.closest(".question-card").remove();
+      } else {
+        alert("Failed to unbookmark");
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      alert("Something went wrong!");
+    }
+  }
+</script>
 
 </body>
 </html>
