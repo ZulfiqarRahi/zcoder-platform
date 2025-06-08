@@ -15,13 +15,13 @@ router.post("/:id", async (req, res) => {
       return res.status(404).send("Question not found");
     }
 
-    // Add user ID only if not already bookmarked
+    
     if (!question.bookmark.includes(userId)) {
       question.bookmark.push(userId);
       await question.save();
     }
 
-    res.redirect("/console/problem"); // stay on same page
+    res.redirect("/console/problem"); 
   } catch (err) {
     console.error("Bookmark error:", err);
     res.status(500).send("Server Error");
@@ -72,7 +72,7 @@ router.post("/unbook/:id", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const questions = await Question.find({ bookmark: req.user._id });
-    res.render("bookmark", { questions }); // create bookmarks.ejs for rendering
+    res.render("bookmark", { questions }); 
   } catch (err) {
     console.error("Fetching bookmarks failed:", err);
     res.status(500).send("Server Error");
