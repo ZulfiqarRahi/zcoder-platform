@@ -90,24 +90,6 @@
 },
 {
   "_id": {
-    "$oid": "682ec06691e9bc8eab1fe1f1"
-  },
-  "fullname": "archo Farida",
-  "email": "archo@gmail.com",
-  "password": "bc8a321ed6c911acd5b03a0d7d02e8156d1b6b8a97dde069ce9ab0e17a31ccbf",
-  "profileImage": "/images/OIP.webp",
-  "role": "USER",
-  "createdAt": {
-    "$date": "2025-05-22T06:12:54.910Z"
-  },
-  "updatedAt": {
-    "$date": "2025-05-30T14:08:55.845Z"
-  },
-  "salt": "��4�\u001dV\"u8m8�M\u0007�U",
-  "__v": 0
-},
-{
-  "_id": {
     "$oid": "683440016b9c2a25409675b3"
   },
   "fullname": "sakina banoo",
@@ -126,24 +108,6 @@
 },
 {
   "_id": {
-    "$oid": "68348bf2dd7f512bd2af00cf"
-  },
-  "fullname": "Sabika Jannat",
-  "email": "j.sabika@gmail.com",
-  "password": "c7974c1b7f7453bdadbf5178fb31d360ff1bbe3852018c53e3320e08d94b25ce",
-  "profileImage": "/images/user-j.sabika@gmail.com-1748598168212.jpg",
-  "role": "ADMIN",
-  "createdAt": {
-    "$date": "2025-05-26T15:42:42.539Z"
-  },
-  "updatedAt": {
-    "$date": "2025-06-04T05:35:20.859Z"
-  },
-  "salt": "�\u001cж��)��tB�\u0013(\u001f",
-  "__v": 0
-},
-{
-  "_id": {
     "$oid": "6839853b7602127ab6599c54"
   },
   "fullname": "Qasim Allve",
@@ -158,24 +122,6 @@
     "$date": "2025-05-30T15:09:59.197Z"
   },
   "salt": "a��C��n���K���5",
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6839c6537f4d6557ab785da6"
-  },
-  "fullname": "Kharoon Ansari",
-  "email": "a.kharoon@gmail.com",
-  "password": "6024d4bc15aba24ec297078d8938b60418a85d278a8cdbd0eb86c6981aa9c1be",
-  "profileImage": "/images/OIP.webp",
-  "role": "USER",
-  "createdAt": {
-    "$date": "2025-05-30T14:53:07.356Z"
-  },
-  "updatedAt": {
-    "$date": "2025-05-30T15:05:54.279Z"
-  },
-  "salt": "\tQe}�B*(A���\u0012п�",
   "__v": 0
 },
 {
