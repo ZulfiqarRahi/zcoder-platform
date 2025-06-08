@@ -5,8 +5,8 @@
   "fullname": "Arif sarkari",
   "email": "arifdhadwa@gmail.com",
   "password": "7c606729653591bb00baa61d2843bb40af19657a658c920fd69d83727f1d3210",
-  "profileImage": "/images/user-arifdhadwa@gmail.com-1748674214387.jpg",
-  "role": "USER",
+  "profileImage": "/images/OIP.webp",
+  "role": "ADMIN",
   "createdAt": {
     "$date": "2025-05-19T11:27:22.984Z"
   },
@@ -239,7 +239,7 @@
   "fullname": "Mohammad Aniz",
   "email": "m.aniz@gmail.com",
   "password": "e646c566a44ac528b09289edc583f6b3d967faba1c0703424b38ac46fc2fffd8",
-  "profileImage": "/images/user-m.aniz@gmail.com-1749303027387.jpg",
+  "profileImage": "/images/OIP.webp",
   "role": "USER",
   "createdAt": {
     "$date": "2025-06-07T13:28:59.767Z"
