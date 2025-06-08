@@ -23,10 +23,10 @@ const upload = multer({
   fileFilter: (req, file, cb) => file.mimetype.startsWith('image/') ? cb(null, true) : cb(new Error('Only images allowed'), false)
 });
 
-// GET profile edit page
+
 router.get("/profile", (req, res) => res.render("Editprofile.ejs", { user: req.user }));
 
-// POST profile update
+
 router.post("/profile", upload.single("avatar"), async (req, res, next) => {
   try {
     const userId = req.user._id;
@@ -41,20 +41,17 @@ router.post("/profile", upload.single("avatar"), async (req, res, next) => {
       updateData.profileImage = `/images/${req.file.filename}`;
     }
 
-    // Update in DB
+   
     const updatedUser = await User.findByIdAndUpdate(userId, updateData, { new: true });
 
-    // Refresh login session / req.user
+    
     if (req.login) {
-      // Passport.js
       req.login(updatedUser, err => err ? next(err) : res.redirect('/home'));
     } else if (req.session) {
-      // Custom express-session
       req.session.user = updatedUser;
       req.user = updatedUser;
       res.redirect('/home');
     } else {
-      // Fallback
       res.redirect('/home');
     }
   } catch (err) {
@@ -63,10 +60,9 @@ router.post("/profile", upload.single("avatar"), async (req, res, next) => {
   }
 });
 
-// GET password update page
+
 router.get("/password", (req, res) => res.render("passwordUpdate"));
 
-// POST password update
 router.post("/password", async (req, res) => {
   try {
     const { oldPassword, newPassword, confirmPassword } = req.body;
