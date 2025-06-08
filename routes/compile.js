@@ -1,7 +1,7 @@
-// routes/compile.js
+
 const express = require("express");
 const axios = require("axios");
-require("dotenv").config(); // Ensure env vars are loaded
+require("dotenv").config(); 
 
 const router = express.Router();
 
@@ -12,12 +12,12 @@ router.post("/", async (req, res) => {
       return res.status(400).json({ error: "Missing source_code or language_id" });
     }
 
-    // Accept either `stdin` or `input` from the client
+   
     const stdinData = (typeof stdin === "string" && stdin.trim() !== "")
       ? stdin
       : (typeof input === "string" ? input : "");
 
-    // 1) Create a new submission
+    
     const createRes = await axios.post(
       `https://${process.env.RAPIDAPI_HOST}/submissions?base64_encoded=false&wait=false`,
       {
@@ -36,7 +36,7 @@ router.post("/", async (req, res) => {
 
     const token = createRes.data.token;
 
-    // 2) Poll until done
+   
     let result;
     do {
       await new Promise(r => setTimeout(r, 1500));
